@@ -41,9 +41,11 @@ def handle_hello():
 
 @app.route('/member/<int:id>', methods=['GET'])
 def getsingleuser(id):  
-    members = jackson_family.get_all_members.filter_by(id=id).first()
-
-    return jsonify(member = members.serialize()), 200
+        response_body = {
+       
+        }
+        return jsonify()
+    
 
 
 
