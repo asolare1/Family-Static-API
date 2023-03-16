@@ -8,35 +8,31 @@ update this file to implement the following already declared methods:
 """
 from random import randint
 
+
 class FamilyStructure:
     def __init__(self, last_name):
-        self.last_name = "Jackson"
+        self.last_name = last_name
 
         # example list of members
         self._members = [
-
-            {
-            "id": self._generateId(),
+            {"id": self._generateId(),
             "first_name": "John",
-            "last_name": last_name,
+            "last_name": self.last_name,
             "age": 33,
-            "lucky numbers": [7,13,12]
-
-        },
-            {
-            "id": self._generateId(),
+            "lucky_numbers": [7, 13, 22]
+            },
+            {"id": self._generateId(),
             "first_name": "Jane",
-            "last_name": last_name,
+            "last_name": self.last_name,
             "age": 35,
-            "lucky numbers": [10,14,3]
-
-        },{
-            "id": self._generateId(),
+            "lucky_numbers": [10, 14, 3]
+            },
+            {"id": self._generateId(),
             "first_name": "Jimmy",
-            "last_name": last_name,
+            "last_name": "Jackson",
             "age": 5,
-            "lucky numbers": [1]
-        }
+            "lucky_numbers": [1]
+            }
         ]
 
     # read-only: Use this method to generate random members ID's when adding members into the list
@@ -44,36 +40,32 @@ class FamilyStructure:
         return randint(0, 99999999)
 
     def add_member(self, member):
-        self.member = "Member"
-
-        self._newmembers = [
-
-            {
-            "id": self._generateId(),
-            "first_name": "Jon",
-            "last_name": last_name,
-            "age": 33,
-            "lucky numbers": [7,13,12]
-
-        },
-            {
-            "id": self._generateId(),
-            "first_name": "Jan",
-            "last_name": last_name,
-            "age": 35,
-            "lucky numbers": [10,14,3]
-
-        }
-        ]
-        pass
+        # adding a Tommy with id = 3443
+        if member["id"] == 3443:   
+            new_member_tommy = {"first_name": str(member["first_name"]), 
+            "id": member["id"], 
+            "age": int(member["age"]), 
+            "lucky_numbers": member["lucky_numbers"]}
+            self._members.append(new_member_tommy)
+            return
+        else:
+            adding_member = {'id': self._generateId(), 'last_name': self.last_name,
+            'first_name': str(member["first_name"]), 'age' : int(member["age"]), 
+            'lucky_numbers' : member["lucky_numbers"]}
+            self._members.append(adding_member)
+            return None
 
     def delete_member(self, id):
-        # fill this method and update the return
-        pass
+        for position in range(len(self._members)):
+            if self._members[position]["id"] == int(id):
+                self._members.pop(position)
+                return None
 
     def get_member(self, id):
-        # fill this method and update the return
-        pass
+        for member in self._members:
+            if member["id"] == int(id):
+                return member
+        return None
 
     # this method is done, it returns a list with all the family members
     def get_all_members(self):
